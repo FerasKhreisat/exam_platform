@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}لوحة الطالب{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-card">
+
+    <!-- ===== معلومات الطالب ===== -->
+    <div class="profile-box">
+
+        <div class="avatar-container">
+            <img src="{{ url_for('static', filename='avatar.png') }}" class="student-avatar">
+
+            {% if total_exams > 0 %}
+                {% set last_score = results[0].score %}
+
+                {% if last_score >= 90 %}
+                    <div class="badge-rank rank-excellent">ممتاز</div>
+                {% elif last_score >= 70 %}
+                    <div class="badge-rank rank-good">جيّد</div>
+                {% elif last_score >= 50 %}
+                    <div class="badge-rank rank-ok">مقبول</div>
+                {% else %}
+                    <div class="badge-rank rank-weak">ضعيف</div>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <h2 class="student-name">{{ student.full_name }}</h2>
+
+        <p class="grade-text">
+            الصف المسجَّل: {{ student.grade }}
+        </p>
+
+        <!-- إحصائيات عامة -->
+        <div class="stats-row">
+
+            <div class="stat-item">
+                <div class="stat-number">{{ total_exams }}</div>
+                <div class="stat-label">عدد الامتحانات</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-number">{{ total_correct }}</div>
+                <div class="stat-label">إجابات صحيحة</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-number">{{ total_wrong }}</div>
+                <div class="stat-label">إجابات خاطئة</div>
+            </div>
+
+        </div>
+
+        <a href="{{ url_for('choose_grade') }}" class="btn btn-gold w-100 mt-3">
+            🔄 تغيير الصف/المسار/الفصل
+        </a>
+
+    </div>
+
+    <!-- ===== سجل الامتحانات ===== -->
+    <div class="results-box">
+
+        <h3 class="section-title">سجل الامتحانات</h3>
+
+        {% if results %}
+            {% for r in results %}
+            <div class="result-item">
+
+                <div class="result-left">
+                    <h4 class="subject-name">{{ r.subject_name }}</h4>
+                    <p class="result-date">{{ r.date }}</p>
+                </div>
+
+                <div class="result-right">
+                    <div class="score-circle">{{ r.score|round(0) }}%</div>
+                    <div class="correct-wrong">
+                        <span class="correct">✔ {{ r.correct }}</span>
+                        <span class="wrong">✘ {{ r.wrong }}</span>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center text-muted mb-0">لا توجد امتحانات بعد.</p>
+        {% endif %}
+
+        <a href="{{ url_for('student_subjects') }}" class="btn btn-outline-light w-100 mt-3">
+            📚 عرض المواد المتاحة
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

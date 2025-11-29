@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}رفع بنك الأسئلة{% endblock %}
+
+{% block content %}
+
+<style>
+.upload-wrapper {
+    width: 100%;
+    max-width: 600px;
+}
+
+.upload-card {
+    background: rgba(255,255,255,0.06);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+.form-control, .form-select {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.success-box {
+    background: rgba(0,200,100,0.2);
+    border: 1px solid rgba(0,200,100,0.4);
+    color: #aaffc8;
+    padding: .7rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.error-box {
+    background: rgba(255,0,0,0.2);
+    border: 1px solid rgba(255,0,0,0.4);
+    color: #ffb3b3;
+    padding: .7rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+</style>
+
+<div class="upload-wrapper">
+
+    <div class="upload-card">
+
+        <h2 class="fw-bold text-center mb-3">📤 رفع بنك أسئلة</h2>
+        <p class="text-light text-center mb-4">
+            اختر المادة ثم ارفع ملف Excel الخاص بالأسئلة.
+        </p>
+
+        {% if message %}
+        <div class="success-box">{{ message }}</div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error-box">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label class="form-label">اختر المادة</label>
+                <select name="subject_id" class="form-select" required>
+                    <option value="" disabled selected>— اختر مادة —</option>
+                    {% for s in subjects %}
+                    <option value="{{ s.id }}">{{ s.name }} — {{ s.grade }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">ملف الأسئلة (Excel)</label>
+                <input type="file" name="file" class="form-control" accept=".xlsx,.xls" required>
+            </div>
+
+            <button type="submit" class="btn btn-gold w-100 mt-2">
+                🚀 رفع الملف واستيراد الأسئلة
+            </button>
+
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('admin_subjects') }}"
+               class="btn btn-outline-light btn-sm">
+               ⬅ العودة للمواد
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

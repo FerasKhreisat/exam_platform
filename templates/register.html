@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}إنشاء حساب طالب{% endblock %}
+{% block content %}
+
+<style>
+.register-card {
+    width: 420px;
+    margin: auto;
+    margin-top: 60px;
+    padding: 35px 25px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    text-align: center;
+}
+.register-card img {
+    width: 125px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0px 0px 3px #000);
+}
+.register-card h3 {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 23px;
+}
+.form-control, .form-select {
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    padding-right: 12px;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+.btn-register {
+    height: 46px;
+    width: 100%;
+    background: linear-gradient(90deg, #FFB300, #FF8F00);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 8px;
+    transition: 0.3s;
+}
+.btn-register:hover { opacity: 0.85; }
+.error-box {
+    background: rgba(255,0,0,0.25);
+    padding: 8px;
+    border-radius: 8px;
+    color: #ffdddd;
+    margin-bottom: 12px;
+}
+</style>
+
+<div class="register-card fade-in">
+
+    <img src="{{ url_for('static', filename='Logo.png') }}" alt="Logo">
+
+    <h3>إنشاء حساب جديد</h3>
+
+    {% if error %}
+    <div class="error-box">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="full_name" class="form-control" placeholder="الاسم الكامل" required>
+
+        <input type="email" name="email" class="form-control" placeholder="البريد الإلكتروني" required>
+
+        <select name="grade" class="form-select" required>
+            <option value="">اختر الصف الدراسي</option>
+            {% for g in grades %}
+            <option value="{{ g }}">{{ g }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required>
+
+        <button type="submit" class="btn-register">إنشاء الحساب</button>
+
+        <div class="mt-3 small text-white">
+            لديك حساب مسبقاً؟
+            <a href="{{ url_for('login') }}" class="text-decoration-underline text-white">
+                تسجيل الدخول
+            </a>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

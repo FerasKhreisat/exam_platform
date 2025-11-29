@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}تفاصيل السؤال{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-wrapper">
+
+    <!-- العنوان -->
+    <div class="card-glass d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold mb-0">تفاصيل السؤال</h3>
+        <a href="{{ url_for('admin_questions', subject_id=question.subject_id) }}"
+           class="btn btn-sm btn-outline-light">
+            ⬅ رجوع لأسئلة المادة
+        </a>
+    </div>
+
+    <div class="card-glass">
+
+        <!-- نص السؤال -->
+        <h5 class="fw-bold text-light mb-3">📘 {{ question.text }}</h5>
+
+        <!-- الخيارات -->
+        <div class="list-group">
+
+            <!-- الخيار الأول -->
+            <div class="list-group-item bg-dark text-white
+                {% if question.correct_option == '1' %} border-success border-2 {% endif %}">
+                <strong>أ)</strong> {{ question.option1 }}
+                {% if question.correct_option == '1' %}
+                <span class="badge bg-success float-start">✔ صحيح</span>
+                {% endif %}
+            </div>
+
+            <!-- الخيار الثاني -->
+            <div class="list-group-item bg-dark text-white
+                {% if question.correct_option == '2' %} border-success border-2 {% endif %}">
+                <strong>ب)</strong> {{ question.option2 }}
+                {% if question.correct_option == '2' %}
+                <span class="badge bg-success float-start">✔ صحيح</span>
+                {% endif %}
+            </div>
+
+            <!-- الخيار الثالث -->
+            <div class="list-group-item bg-dark text-white
+                {% if question.correct_option == '3' %} border-success border-2 {% endif %}">
+                <strong>ج)</strong> {{ question.option3 }}
+                {% if question.correct_option == '3' %}
+                <span class="badge bg-success float-start">✔ صحيح</span>
+                {% endif %}
+            </div>
+
+            <!-- الخيار الرابع -->
+            <div class="list-group-item bg-dark text-white
+                {% if question.correct_option == '4' %} border-success border-2 {% endif %}">
+                <strong>د)</strong> {{ question.option4 }}
+                {% if question.correct_option == '4' %}
+                <span class="badge bg-success float-start">✔ صحيح</span>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <!-- أزرار التعديل والحذف -->
+        <div class="d-flex justify-content-between mt-4">
+
+            <a href="{{ url_for('admin_edit_question', question_id=question.id) }}"
+               class="btn btn-warning px-4">
+                ✏ تعديل السؤال
+            </a>
+
+            <a href="{{ url_for('admin_delete_question', question_id=question.id) }}"
+               class="btn btn-danger px-4"
+               onclick="return confirm('هل أنت متأكد من حذف هذا السؤال؟ لا يمكن التراجع.')">
+                🗑 حذف السؤال
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

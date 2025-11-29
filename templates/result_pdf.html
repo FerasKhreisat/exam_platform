@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <!-- مهم للـ PDF ويدعم العربية -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>نتيجة الامتحان</title>
+
+    <style>
+        /* إعداد صفحة A4 للـ PDF */
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: "Cairo";
+            direction: rtl;
+            text-align: right;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            background: #ffffff;
+            color: #000000;
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin: 0 0 10px 0;
+            font-family: "Cairo";
+        }
+
+        .wrapper {
+            padding: 20px;
+        }
+
+        .info-box {
+            border: 1px solid #444444;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+        }
+
+        .info-line {
+            margin-bottom: 6px;
+        }
+
+        .info-line strong {
+            display: inline-block;
+            min-width: 110px;
+        }
+
+        .score-box {
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #000000;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            background: #e8e8e8;
+        }
+
+        .answer-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #cccccc;
+        }
+
+        .q-text {
+            font-size: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .option-line {
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .correct {
+            color: #0c7d0c;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: #b00000;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 11px;
+            color: #555555;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+    <h2>تقرير نتيجة الامتحان</h2>
+    <h3>{{ result.subject.name }}</h3>
+
+    <!-- معلومات عامة -->
+    <div class="info-box">
+        <div class="info-line">
+            <strong>اسم الطالب:</strong> {{ result.student.full_name }}
+        </div>
+
+        <div class="info-line">
+            <strong>الصف:</strong> {{ result.student.grade }}
+        </div>
+
+        <div class="info-line">
+            <strong>تاريخ الامتحان:</strong> {{ result.date.strftime("%Y-%m-%d %H:%M") }}
+        </div>
+
+        <div class="info-line">
+            <strong>عدد الأسئلة:</strong> {{ answers|length }}
+        </div>
+    </div>
+
+    <!-- النتيجة -->
+    <div class="score-box">
+        النتيجة: {{ result.score|round(0) }}%
+    </div>
+
+    <!-- الإجابات -->
+    <h3>مراجعة الإجابات</h3>
+
+    {% for a in answers %}
+    <div class="answer-item">
+        <div class="q-text">{{ loop.index }}. {{ a.text }}</div>
+
+        <!-- إجابة الطالب -->
+        <div class="option-line">
+            <strong>إجابتك:</strong>
+            {% if a.student_answer == a.correct_option %}
+                <span class="correct">
+                    {% if a.student_answer == '1' %}{{ a.option1 }}
+                    {% elif a.student_answer == '2' %}{{ a.option2 }}
+                    {% elif a.student_answer == '3' %}{{ a.option3 }}
+                    {% elif a.student_answer == '4' %}{{ a.option4 }}
+                    {% endif %}
+                </span>
+            {% else %}
+                <span class="wrong">
+                    {% if a.student_answer == '1' %}{{ a.option1 }}
+                    {% elif a.student_answer == '2' %}{{ a.option2 }}
+                    {% elif a.student_answer == '3' %}{{ a.option3 }}
+                    {% elif a.student_answer == '4' %}{{ a.option4 }}
+                    {% endif %}
+                </span>
+            {% endif %}
+        </div>
+
+        <!-- الإجابة الصحيحة -->
+        <div class="option-line">
+            <strong>الإجابة الصحيحة:</strong>
+            <span class="correct">
+                {% if a.correct_option == '1' %}{{ a.option1 }}
+                {% elif a.correct_option == '2' %}{{ a.option2 }}
+                {% elif a.correct_option == '3' %}{{ a.option3 }}
+                {% elif a.correct_option == '4' %}{{ a.option4 }}
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="footer">
+        منصة امتحاناتي – تقرير النتيجة
+    </div>
+
+</div>
+</body>
+</html>

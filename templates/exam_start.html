@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}بدء الامتحان{% endblock %}
+
+{% block content %}
+<div class="exam-start-card">
+
+    <!-- عنوان المادة -->
+    <h2 class="fw-bold text-center mb-2">{{ subject.name }}</h2>
+
+    <!-- الصف / المسار / الفصل -->
+    <p class="text-center text-light mb-3">
+        {{ subject.grade }}
+    </p>
+
+    <hr class="my-3" style="border-color: rgba(255,255,255,0.15);">
+
+    <!-- معلومات الامتحان -->
+    <div class="mb-3 text-light">
+        <div class="d-flex justify-content-between">
+            <span>⏱ مدة الامتحان:</span>
+            <span class="fw-semibold">{{ subject.default_duration }} دقيقة</span>
+        </div>
+
+        <div class="d-flex justify-content-between mt-2">
+            <span>📘 عدد الأسئلة:</span>
+            <span class="fw-semibold">{{ subject.default_questions }} سؤال</span>
+        </div>
+    </div>
+
+    <!-- صندوق تحذير -->
+    <div class="warning-box">
+        ⚠ بمجرد الضغط على "بدء الامتحان" سيبدأ العدّ التنازلي ولن يمكنك التوقف.
+    </div>
+
+    <!-- خطأ لو ما في أسئلة -->
+    {% if error %}
+    <div class="alert alert-danger py-2 text-center">{{ error }}</div>
+    {% endif %}
+
+    <!-- زر البدء -->
+    <form method="POST">
+        <button type="submit" class="btn btn-gold w-100">
+            🚀 بدء الامتحان الآن
+        </button>
+    </form>
+
+    <!-- رجوع -->
+    <div class="text-center mt-3">
+        <a href="{{ url_for('student_subjects') }}" class="text-muted small">
+            ⬅ الرجوع إلى المواد
+        </a>
+    </div>
+
+</div>
+{% endblock %}

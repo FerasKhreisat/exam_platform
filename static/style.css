@@ -1,0 +1,771 @@
+/* ===============================
+   🔥 الخلفية الداكنة العامة
+================================= */
+
+body.app-body {
+    background: linear-gradient(to bottom, #0a0f24, #050812);
+    font-family: "Cairo", sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    padding-top: 90px;
+}
+
+/* الشريط العلوي */
+.app-navbar {
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* الكارد الزجاجي */
+.card-glass {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 0 40px rgba(0,0,0,0.3);
+}
+
+/* الأزرار الذهبية */
+.btn-gold {
+    background: linear-gradient(135deg, #ffd86b, #ffb347);
+    border: none;
+    padding: .7rem 1rem;
+    border-radius: 12px;
+    color: #111;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.btn-gold:hover {
+    opacity: .85;
+}
+
+/* عناوين */
+h1, h2, h3 {
+    color: #fff;
+}
+
+/* ===== تصميم exam (نفس الكود الذي عندك تماماً) ===== */
+/* ضعه كما هو دون حذف */
+/* ===============================
+   🎯 ضبط ألوان صفحة exam_start
+================================= */
+
+.exam-start-card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(15px);
+    border-radius: 22px;
+    padding: 2rem 2.5rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 0 40px rgba(0,0,0,0.35);
+}
+
+/* كل النصوص داخل كارد البداية */
+.exam-start-card,
+.exam-start-card * {
+    color: #fff !important;
+}
+
+/* النصوص الثانوية */
+.exam-start-card .text-muted {
+    color: #c7c7c7 !important;
+}
+
+/* خانة التحذير */
+.exam-start-card .warning-box {
+    background: rgba(255, 70, 70, 0.25);
+    color: #ffb3b3 !important;
+    border-radius: 10px;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    border: 1px solid rgba(255,70,70,0.4);
+}
+
+/* زر "بدء الامتحان الآن" */
+.exam-start-card .btn-gold {
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: .75rem;
+    margin-top: .5rem;
+}
+/* ===============================
+   🎯 تصميم الداشبورد
+================================= */
+
+.dashboard-card {
+    width: 100%;
+    max-width: 900px;
+    padding: 2rem;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 0 40px rgba(0,0,0,0.4);
+}
+
+/* صندوق معلومات الطالب */
+.profile-box {
+    background: rgba(0,0,0,0.25);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.student-name {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.grade-text {
+    text-align: center;
+    color: #d0d6f8;
+    margin-top: .3rem;
+}
+
+/* الإحصائيات */
+.stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffd86b;
+}
+
+.stat-label {
+    color: #ccc;
+    font-size: .85rem;
+}
+
+/* قائمة النتائج */
+.results-box {
+    background: rgba(0,0,0,0.25);
+    border-radius: 18px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.section-title {
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.05);
+    padding: 1rem;
+    border-radius: 14px;
+    margin-bottom: .8rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: .2s;
+}
+
+.result-item:hover {
+    background: rgba(255,255,255,0.09);
+}
+
+.subject-name {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 600;
+}
+
+.result-date {
+    color: #aaa;
+    font-size: .8rem;
+}
+
+.score-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff8d6, #e3b647, #b07b16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #1a1406;
+    font-size: 1rem;
+}
+
+.correct-wrong {
+    text-align: center;
+    font-size: .85rem;
+    margin-top: .3rem;
+}
+
+.correct {
+    color: #00e676;
+    font-weight: 600;
+}
+
+.wrong {
+    color: #ff5252;
+    font-weight: 600;
+}
+/* ===============================
+   👤 صورة الطالب + شارات المستوى
+================================= */
+
+.avatar-container {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.student-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 3px solid #ffd86b;
+}
+
+.badge-rank {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: .75rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.rank-excellent {
+    background: linear-gradient(135deg, #00e676, #0fbf4b);
+    box-shadow: 0 0 10px rgba(0,255,100,0.4);
+}
+
+.rank-good {
+    background: linear-gradient(135deg, #ffd86b, #ffb347);
+    color: #1a1406;
+    box-shadow: 0 0 10px rgba(255,200,80,0.4);
+}
+
+.rank-ok {
+    background: linear-gradient(135deg, #4fc3f7, #0288d1);
+    box-shadow: 0 0 10px rgba(50,150,255,0.4);
+}
+
+.rank-weak {
+    background: linear-gradient(135deg, #ff5252, #e53935);
+    box-shadow: 0 0 10px rgba(255,80,80,0.4);
+}
+/* ===========================
+   صفحة الامتحان الجديدة
+=========================== */
+
+.exam-container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+}
+
+.exam-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.exam-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.exam-progress {
+    color: #aaa;
+    font-size: .9rem;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+}
+
+.question-text {
+    font-size: 1.3rem;
+    line-height: 2.1rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.options-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.option-item {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: .9rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    cursor: pointer;
+    transition: .2s;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.option-item:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+.option-item input {
+    transform: scale(1.3);
+}
+
+.option-item span {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.next-btn {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    padding: .8rem;
+}
+
+.questions-navigation {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+    gap: .4rem;
+}
+
+.q-number-box {
+    background: rgba(255,255,255,0.08);
+    color: #ddd;
+    text-align: center;
+    padding: .5rem 0;
+    border-radius: 10px;
+    font-size: .85rem;
+}
+
+.q-number-box.active {
+    background: #ffd86b;
+    color: #000;
+    font-weight: bold;
+}
+/* ===============================
+   لوحة تحكم الأدمن
+================================= */
+
+.dashboard-wrapper {
+    width: 100%;
+    max-width: 1100px;
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.25rem;
+}
+
+.stat-card {
+    background: radial-gradient(circle at top, #1a2340, #050812);
+    border-radius: 18px;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.5);
+}
+
+.stat-title {
+    font-size: .85rem;
+    color: #c7ccff;
+    margin-bottom: .25rem;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffd86b;
+    margin-bottom: .1rem;
+}
+
+.stat-sub {
+    font-size: .8rem;
+    color: #9da4d1;
+}
+
+/* جدول النتائج في لوحة التحكم */
+.dashboard-table thead tr {
+    background: rgba(255,255,255,0.04);
+}
+
+.dashboard-table tbody tr:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+/* زر يبدو معطّل (تنبيه فقط) */
+.disabled-link {
+    opacity: .6;
+    pointer-events: none;
+}
+
+/* تصغير قليلاً في الموبايل */
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .75rem;
+    }
+}
+/* ===============================
+   🎯 صفحة اختيار نوع الامتحان
+================================= */
+
+.exam-modes-wrapper {
+    width: 100%;
+    max-width: 900px;
+}
+
+.modes-header h2 {
+    color: #fff;
+    font-weight: 700;
+}
+
+.exam-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+/* زر على شكل كرت – نزيل شكل الزر الافتراضي */
+.mode-card {
+    position: relative;
+    border: none;
+    text-align: right;
+    background: radial-gradient(circle at top, #1b2140, #070b1a);
+    border-radius: 20px;
+    padding: 1.5rem 1.4rem 1.6rem;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.65);
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.mode-card:focus {
+    outline: none;
+}
+
+/* حركة الهوفر */
+.mode-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 55px rgba(0,0,0,0.85);
+    border-color: rgba(255,216,107,0.5);
+}
+
+/* الأيقونة الدائرية */
+.mode-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 30% 30%, #fff8d6, #e9b64f, #a76c15);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.7);
+    font-size: 1.6rem;
+    margin-bottom: .8rem;
+}
+
+/* شارة أعلى الكرت */
+.mode-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: .75rem;
+    padding: .15rem .55rem;
+    border-radius: 999px;
+    background: rgba(255,216,107,0.12);
+    color: #ffd86b;
+    border: 1px solid rgba(255,216,107,0.4);
+}
+
+.mode-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: .4rem;
+}
+
+.mode-desc {
+    color: #cdd3ff;
+    font-size: .85rem;
+    margin-bottom: .75rem;
+}
+
+.mode-meta li {
+    font-size: .8rem;
+    color: #aeb5e6;
+    margin-bottom: .25rem;
+}
+
+.mode-meta span {
+    color: #ffd86b;
+    font-weight: 600;
+}
+
+/* موبايل */
+@media (max-width: 900px) {
+    .exam-modes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.exam-type-options {
+    margin-top: .5rem;
+}
+
+.exam-type-option {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    background: rgba(0,0,0,0.35);
+    border-radius: 14px;
+    padding: .6rem .9rem;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+
+.exam-type-option input {
+    accent-color: #ffd86b;
+    transform: scale(1.1);
+}
+
+.exam-type-option .type-title {
+    color: #fff;
+    font-weight: 600;
+    font-size: .95rem;
+}
+
+.exam-type-option .type-sub {
+    color: #cfd5ff;
+    font-size: .8rem;
+}
+
+.exam-type-option:hover {
+    background: rgba(0,0,0,0.55);
+    border-color: rgba(255,216,107,0.7);
+    transform: translateY(-1px);
+}
+.exam-start-card {
+    max-width: 720px;
+    margin-inline: auto;
+    background: radial-gradient(circle at top, #151b35, #050812);
+    border-radius: 24px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+/* ===========================
+   🎉 صفحة النتيجة
+=========================== */
+
+.result-card {
+    max-width: 800px;
+    margin: auto;
+    background: rgba(255,255,255,0.06);
+    border-radius: 24px;
+    padding: 2rem;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 0 40px rgba(0,0,0,0.45);
+}
+
+/* الدائرة */
+.score-ring {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.ring {
+    --size: 140px;
+    --track: rgba(255,255,255,0.1);
+    --bar: #ffd86b;
+
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle closest-side, #0000 79%, #000 80% 100%),
+        conic-gradient(var(--bar) calc(var(--percent)*1%), var(--track) 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-text {
+    font-size: 2rem;
+    color: #fff;
+    font-weight: 800;
+}
+
+/* الشارات */
+.result-badge {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: .6rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+}
+
+.badge-excellent { background: #00e67620; color: #00e676; }
+.badge-good { background: #ffd86b20; color: #ffd86b; }
+.badge-acceptable { background: #4fc3f720; color: #4fc3f7; }
+.badge-fail { background: #ff525220; color: #ff5252; }
+
+/* الإحصائيات */
+.result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.stat-box {
+    text-align: center;
+}
+
+.stat-box .num {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.stat-box.green .num { color: #00e676; }
+.stat-box.red   .num { color: #ff5252; }
+
+.stat-box .label {
+    font-size: .85rem;
+    color: #ccc;
+}
+
+/* قائمة الإجابات */
+.answers-list {
+    margin-top: 1rem;
+}
+
+.answer-item {
+    background: rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 1rem;
+    margin-bottom: .75rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.answer-item.correct {
+    border-color: #00e67680;
+}
+
+.answer-item.wrong {
+    border-color: #ff525280;
+}
+
+.answer-item .q-text {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.answer-item .q-details {
+    font-size: .85rem;
+    color: #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+.q-number-box.answered {
+    background: #00c878;
+    color: #fff;
+    font-weight: 600;
+}
+.subject-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    padding: 1.3rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: .2s;
+}
+
+.subject-card:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-4px);
+}
+
+.subject-name {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.subject-grade {
+    color: #cfd5ff;
+    margin-bottom: .5rem;
+    font-size: .85rem;
+}
+
+.subject-meta {
+    padding-right: 15px;
+    margin-bottom: 0.5rem;
+}
+
+.subject-meta li {
+    color: #ddd;
+    font-size: .85rem;
+}
+
+.subject-meta span {
+    color: #ffd86b;
+    font-weight: 700;
+}
+.q-number-box.answered {
+    background: #00c878;
+    color: #fff;
+    font-weight: bold;
+}
+.brand-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffd86b;
+}

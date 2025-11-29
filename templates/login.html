@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}تسجيل الدخول{% endblock %}
+{% block content %}
+
+<style>
+.login-card {
+    width: 370px;
+    margin: auto;
+    margin-top: 70px;
+    padding: 35px 25px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    text-align: center;
+}
+.login-card img {
+    width: 120px;
+    margin-bottom: 18px;
+    filter: drop-shadow(0px 0px 3px #000);
+}
+.login-card h3 {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 25px;
+    font-size: 23px;
+}
+.form-control {
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    padding-right: 12px;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+.btn-login {
+    height: 46px;
+    width: 100%;
+    background: linear-gradient(90deg, #0047FF, #002F9E);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 8px;
+    transition: 0.3s;
+}
+.btn-login:hover { opacity: 0.85; }
+.login-links a {
+    display: block;
+    margin-top: 15px;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+}
+.login-links a:hover { text-decoration: underline; }
+.error-box {
+    background: rgba(255,0,0,0.25);
+    padding: 8px;
+    border-radius: 8px;
+    color: #ffdddd;
+    margin-bottom: 12px;
+}
+</style>
+
+<div class="login-card fade-in">
+
+    <!-- الشعار -->
+    <img src="{{ url_for('static', filename='Logo.png') }}" alt="Logo">
+
+    <h3>تسجيل الدخول</h3>
+
+    {% if error %}
+    <div class="error-box">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="email" name="email" class="form-control" placeholder="البريد الإلكتروني" required>
+        <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required>
+
+        <button type="submit" class="btn-login">دخول</button>
+    </form>
+
+    <div class="login-links">
+        <a href="{{ url_for('register') }}">طالب جديد؟ أنشئ حساب</a>
+        <a href="{{ url_for('forgot_password') }}">نسيت كلمة المرور؟</a>
+        <a href="{{ url_for('admin_login') }}">تسجيل دخول الأدمن</a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}نتيجة الامتحان{% endblock %}
+
+{% block content %}
+<div class="result-card">
+
+    <!-- دائرة النتيجة -->
+    <div class="score-ring">
+        <div class="ring" style="--percent: {{ result.score|round(0) }}">
+            <span class="score-text">{{ result.score|round(0) }}%</span>
+        </div>
+    </div>
+
+    <!-- شارة النتيجة -->
+    {% if result.score >= 90 %}
+        <div class="result-badge badge-excellent">🌟 ممتاز جداً!</div>
+    {% elif result.score >= 70 %}
+        <div class="result-badge badge-good">👍 نتيجة جيّدة</div>
+    {% elif result.score >= 50 %}
+        <div class="result-badge badge-acceptable">🙂 نتيجة مقبولة</div>
+    {% else %}
+        <div class="result-badge badge-fail">😢 تحتاج لتحسين</div>
+    {% endif %}
+
+    <!-- إحصائيات -->
+    <div class="result-stats">
+        <div class="stat-box green">
+            <div class="num">{{ result.correct_count }}</div>
+            <div class="label">إجابات صحيحة</div>
+        </div>
+
+        <div class="stat-box red">
+            <div class="num">{{ result.wrong_count }}</div>
+            <div class="label">إجابات خاطئة</div>
+        </div>
+    </div>
+
+    <!-- مراجعة الإجابات -->
+    <h4 class="answers-title">مراجعة الإجابات</h4>
+
+    <div class="answers-list">
+        {% for a in answers %}
+        <div class="answer-item {% if a.is_correct %}correct{% else %}wrong{% endif %}">
+            <div class="q-text">{{ loop.index }}. {{ a.text }}</div>
+
+            <div class="q-details">
+                <div><strong>إجابتك:</strong>
+                    <span class="{% if a.is_correct %}text-success{% else %}text-danger{% endif %}">
+                        {% if a.student_answer == '1' %}{{ a.option1 }}
+                        {% elif a.student_answer == '2' %}{{ a.option2 }}
+                        {% elif a.student_answer == '3' %}{{ a.option3 }}
+                        {% elif a.student_answer == '4' %}{{ a.option4 }}
+                        {% endif %}
+                    </span>
+                </div>
+
+                <div><strong>الإجابة الصحيحة:</strong>
+                    <span class="text-success fw-bold">
+                        {% if a.correct_option == '1' %}{{ a.option1 }}
+                        {% elif a.correct_option == '2' %}{{ a.option2 }}
+                        {% elif a.correct_option == '3' %}{{ a.option3 }}
+                        {% elif a.correct_option == '4' %}{{ a.option4 }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- أزرار -->
+    <div class="d-flex flex-wrap gap-2 justify-content-center my-3">
+
+    <!-- زر عرض تقرير للطباعة (HTML) -->
+    <a href="{{ url_for('exam_result_pdf', result_id=result.id) }}"
+       class="btn btn-outline-light">
+        🖨 عرض تقرير للطباعة
+    </a>
+
+    
+</div>
+{% endblock %}

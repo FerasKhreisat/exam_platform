@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}أنواع الامتحانات{% endblock %}
+
+{% block content %}
+
+<style>
+.exam-modes {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 40px;
+}
+
+.mode-card {
+    background: rgba(255, 255, 255, 0.10);
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.18);
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.mode-card:hover {
+    backdrop-filter: blur(12px);
+    transform: translateY(-5px);
+    border-color: #ffd86b;
+}
+
+.mode-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+}
+
+.mode-desc {
+    font-size: .9rem;
+    color: #cbd2ff;
+    margin-top: 5px;
+}
+
+.btn-select {
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 10px;
+}
+</style>
+
+<div class="exam-modes">
+
+    <h2 class="fw-bold text-center mb-4">اختر نوع الامتحان</h2>
+
+    <p class="text-center text-light mb-4">
+        يمكنك اختيار نوع الامتحان المناسب لك قبل البدء.
+    </p>
+
+    {% if error %}
+    <div class="alert alert-danger text-center py-2">{{ error }}</div>
+    {% endif %}
+
+    <div class="row g-4">
+
+        <!-- امتحان قصير -->
+        <div class="col-md-4">
+            <form method="POST">
+                <input type="hidden" name="mode" value="short">
+                <div class="mode-card">
+                    <div class="mode-title">📘 امتحان قصير</div>
+                    <div class="mode-desc">10 أسئلة – 10 دقائق</div>
+
+                    <button type="submit"
+                            class="btn btn-gold btn-select">
+                        اختيار
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- امتحان متوسط -->
+        <div class="col-md-4">
+            <form method="POST">
+                <input type="hidden" name="mode" value="medium">
+                <div class="mode-card">
+                    <div class="mode-title">📕 امتحان متوسط</div>
+                    <div class="mode-desc">20 سؤال – 20 دقيقة</div>
+
+                    <button type="submit"
+                            class="btn btn-gold btn-select">
+                        اختيار
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- امتحان طويل -->
+        <div class="col-md-4">
+            <form method="POST">
+                <input type="hidden" name="mode" value="long">
+                <div class="mode-card">
+                    <div class="mode-title">📗 امتحان كامل</div>
+                    <div class="mode-desc">40 سؤال – 40 دقيقة</div>
+
+                    <button type="submit"
+                            class="btn btn-gold btn-select">
+                        اختيار
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('student_subjects') }}"
+           class="btn btn-outline-light">
+            ⬅ الرجوع إلى المواد
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

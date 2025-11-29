@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}إضافة مادة جديدة{% endblock %}
+
+{% block content %}
+
+<style>
+.form-section {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    width: 100%;
+    max-width: 650px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #e8eaff;
+}
+
+.form-control, .form-select {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.form-control::placeholder {
+    color: #ccc;
+}
+
+.btn-save {
+    width: 100%;
+    background: linear-gradient(135deg, #ffd86b, #ffb347);
+    border: none;
+    color: #000;
+    padding: .8rem;
+    font-weight: 700;
+    border-radius: 12px;
+    transition: .25s;
+}
+
+.btn-save:hover {
+    opacity: .8;
+}
+</style>
+
+<div class="form-section">
+
+    <!-- العنوان -->
+    <h3 class="fw-bold mb-3 text-center">➕ إضافة مادة جديدة</h3>
+
+    {% if error %}
+    <div class="alert alert-danger text-center py-2">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+
+        <!-- اسم المادة -->
+        <div class="mb-3">
+            <label class="form-label">اسم المادة</label>
+            <input type="text" name="name" class="form-control" required placeholder="مثل: تاريخ الأردن">
+        </div>
+
+        <!-- اختيار الصف -- المسار -- الفصل -->
+        <div class="mb-3">
+            <label class="form-label">الصف الدراسي</label>
+            <select name="grade" class="form-select" required>
+                <option value="" disabled selected>اختر الصف / المسار / الفصل</option>
+
+                {% for g in grades %}
+                <option value="{{ g }}">{{ g }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- عدد الأسئلة -->
+        <div class="mb-3">
+            <label class="form-label">عدد أسئلة الامتحان</label>
+            <input type="number" name="questions" class="form-control" min="5" max="200" value="40" required>
+        </div>
+
+        <!-- مدة الامتحان -->
+        <div class="mb-3">
+            <label class="form-label">مدة الامتحان (بالدقائق)</label>
+            <input type="number" name="duration" class="form-control" min="5" max="200" value="40" required>
+        </div>
+
+        <!-- زر الحفظ -->
+        <button type="submit" class="btn-save">حفظ المادة</button>
+
+        <div class="text-center mt-3">
+            <a href="{{ url_for('admin_subjects') }}" class="text-light small">
+                ⬅ العودة إلى إدارة المواد
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

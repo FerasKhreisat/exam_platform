@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}نتائج الطلاب{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-wrapper">
+
+    <!-- العنوان -->
+    <div class="card-glass d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0 fw-bold">نتائج الطلاب</h3>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-sm btn-outline-light">
+            ⬅ الرجوع للوحة التحكم
+        </a>
+    </div>
+
+    <!-- جدول النتائج -->
+    <div class="card-glass">
+
+        {% if results %}
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle dashboard-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>اسم الطالب</th>
+                        <th>المادة</th>
+                        <th>العلامة</th>
+                        <th>تاريخ التقديم</th>
+                        <th>خيارات</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for r in results %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+
+                        <td>{{ r.student_name }}</td>
+
+                        <td>{{ r.subject_name }}</td>
+
+                        <td>
+                            <span class="badge bg-success-subtle text-success fw-semibold">
+                                {{ "%.0f"|format(r.score) }}%
+                            </span>
+                        </td>
+
+                        <td class="text-muted small">{{ r.date }}</td>
+
+                        <td>
+                            <a href="{{ url_for('admin_delete_result', result_id=r.id) }}"
+                               class="btn btn-sm btn-outline-danger"
+                               onclick="return confirm('هل أنت متأكد من حذف هذه النتيجة؟')">
+                                حذف
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+        {% else %}
+        <p class="text-center text-warning py-2">
+            لا توجد نتائج بعد.
+        </p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

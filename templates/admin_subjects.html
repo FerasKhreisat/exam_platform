@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}إدارة المواد{% endblock %}
+
+{% block content %}
+
+<style>
+.subject-card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+    padding: 1.5rem;
+    transition: 0.2s;
+    cursor: default;
+}
+
+.subject-card:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+.subject-title {
+    font-weight: 700;
+    color: #ffd86b;
+    font-size: 1.1rem;
+}
+
+.subject-meta {
+    color: #a9b4d9;
+    font-size: .9rem;
+}
+
+.action-btn {
+    padding: .45rem .7rem;
+    font-size: .85rem;
+}
+</style>
+
+<div class="card-glass w-100" style="max-width:1000px;">
+
+    <!-- العنوان + زر الرجوع -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex align-items-center gap-2">
+            <a href="{{ url_for('admin_dashboard') }}"
+               class="btn btn-outline-light btn-sm">
+                ⬅ الرجوع للوحة التحكم
+            </a>
+
+            <h3 class="fw-bold mb-0 mb-0">إدارة المواد</h3>
+        </div>
+
+        <a href="{{ url_for('admin_add_subject') }}"
+           class="btn btn-gold">
+            ➕ إضافة مادة جديدة
+        </a>
+    </div>
+
+    <!-- قائمة المواد -->
+    {% if subjects %}
+    <div class="row g-3">
+
+        {% for s in subjects %}
+        <div class="col-md-6 col-lg-4">
+            <div class="subject-card h-100">
+
+                <!-- اسم المادة -->
+                <div class="subject-title mb-1">
+                    {{ s.name }}
+                </div>
+
+                <!-- بيانات المادة -->
+                <div class="subject-meta mb-3">
+                    {{ s.grade }} <br>
+                    مدة الامتحان: {{ s.default_duration }} دقيقة <br>
+                    عدد الأسئلة: {{ s.default_questions }}
+                </div>
+
+                <!-- أزرار التحكم -->
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('admin_edit_subject', subject_id=s.id) }}"
+                       class="btn btn-outline-warning action-btn">تعديل</a>
+
+                    <a href="{{ url_for('admin_questions', subject_id=s.id) }}"
+                       class="btn btn-outline-info action-btn">الأسئلة</a>
+
+                    <a href="{{ url_for('admin_delete_subject', subject_id=s.id) }}"
+                       onclick="return confirm('هل أنت متأكد من حذف هذه المادة؟ سيتم حذف جميع أسئلتها أيضاً.')"
+                       class="btn btn-outline-danger action-btn">
+                        حذف
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <p class="text-center text-warning mt-4">
+        لا توجد مواد بعد… أضف مادة جديدة للبدء.
+    </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

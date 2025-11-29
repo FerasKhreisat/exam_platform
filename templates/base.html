@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} | منصة امتحاناتي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- خط Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+
+    <!-- ملف التنسيق -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="app-body">
+
+<!-- شريط علوي -->
+<nav class="navbar navbar-dark app-navbar fixed-top">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <!-- شعار المنصة -->
+        <a href="{{ url_for('index') }}" class="navbar-brand fw-bold d-flex align-items-center gap-2">
+            <img src="{{ url_for('static', filename='Logo.png') }}"
+                 alt="Logo"
+                 style="height: 48px; width: auto;">
+            <span style="font-size: 20px;">منصة امتحاناتي</span>
+        </a>
+
+        <!-- أزرار حسب المستخدم -->
+        <div class="d-flex align-items-center gap-2">
+
+            {% if session.get('is_admin') %}
+                <a href="{{ url_for('admin_subjects') }}" class="btn btn-sm btn-outline-light">
+                    إدارة المواد
+                </a>
+
+                <a href="{{ url_for('contact') }}" class="btn btn-sm btn-outline-light">
+                    تواصل معنا
+                </a>
+
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-sm btn-outline-light">
+                    خروج الأدمن
+                </a>
+
+            {% elif session.get('student_id') %}
+                <span class="text-white small">
+                    👤 {{ session['student_name'] }}
+                </span>
+
+                <a href="{{ url_for('student_dashboard') }}" class="btn btn-sm btn-outline-light">
+                    ملفي الشخصي
+                </a>
+
+                <a href="{{ url_for('student_subjects') }}" class="btn btn-sm btn-outline_light">
+                    موادي
+                </a>
+
+                <a href="{{ url_for('contact') }}" class="btn btn-sm btn-outline-light">
+                    تواصل معنا
+                </a>
+
+                <a href="{{ url_for('logout') }}" class="btn btn-sm btn-outline-light">
+                    تسجيل خروج
+                </a>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>
+
+<!-- محتوى الصفحة -->
+<main class="app-main d-flex align-items-center justify-content-center">
+    <div class="container d-flex justify-content-center">
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+<!-- الفوتر -->
+<footer class="app-footer text-center text-muted small mt-4 mb-3">
+    من تصميم وإعداد أ. فراس نائل خريسات | 0796400167
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

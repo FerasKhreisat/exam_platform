@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}اختيار الصف والمستوى{% endblock %}
+
+{% block content %}
+
+<div class="card-glass w-100" style="max-width: 520px;">
+
+    <h2 class="text-center fw-bold mb-3">اختيار الصف والمستوى</h2>
+    <p class="text-center text-light mb-4">
+        اختر الصف والمسار والفصل لعرض المواد المتاحة.
+    </p>
+
+    {% if error %}
+    <div class="alert alert-danger text-center py-2">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+
+        <!-- اختيار الصف -->
+        <label class="form-label mt-2">الصف الدراسي</label>
+        <select name="level" class="form-select" required>
+            <option value="" disabled selected>اختر الصف</option>
+            <option value="العاشر">العاشر</option>
+            <option value="الأول الثانوي">الأول الثانوي</option>
+            <option value="الثاني الثانوي">الثاني الثانوي</option>
+        </select>
+
+        <!-- اختيار المسار -->
+        <label class="form-label mt-3">المسار الدراسي</label>
+        <select name="track" class="form-select" required>
+            <option value="" disabled selected>اختر المسار</option>
+            <option value="أكاديمي">أكاديمي</option>
+            <option value="مهني">مهني</option>
+        </select>
+
+        <!-- اختيار الفصل -->
+        <label class="form-label mt-3">الفصل الدراسي</label>
+        <select name="semester" class="form-select" required>
+            <option value="" disabled selected>اختر الفصل</option>
+            <option value="الفصل الأول">الفصل الأول</option>
+            <option value="الفصل الثاني">الفصل الثاني</option>
+        </select>
+
+        <button type="submit"
+                class="btn btn-gold w-100 mt-4">
+            عرض المواد
+        </button>
+    </form>
+
+</div>
+
+{% endblock %}

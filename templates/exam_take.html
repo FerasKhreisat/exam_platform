@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}الامتحان{% endblock %}
+
+{% block content %}
+<div class="exam-container">
+
+    <!-- رأس الامتحان -->
+    <div class="exam-header">
+        <div>
+            <h2 class="exam-title">الامتحان</h2>
+            <p class="exam-progress">السؤال {{ index + 1 }} من {{ total_questions }}</p>
+        </div>
+
+        <div class="timer-box">
+            <span>الوقت المتبقي</span>
+            <div id="timer">{{ duration }}:00</div>
+        </div>
+    </div>
+
+    <!-- بطاقة السؤال -->
+    <div class="question-card">
+        <div class="question-text">
+            {{ question.text }}
+        </div>
+
+        <form method="POST" class="options-form">
+            <input type="hidden" name="question_id" value="{{ question.id }}">
+            <input type="hidden" name="current_index" value="{{ index }}">
+
+            <!-- خيارات -->
+            <label class="option-item">
+                <input type="radio" name="answer" value="1"
+                       {% if saved_answer == 1 %}checked{% endif %}>
+                <span>أ) {{ question.option1 }}</span>
+            </label>
+
+            <label class="option-item">
+                <input type="radio" name="answer" value="2"
+                       {% if saved_answer == 2 %}checked{% endif %}>
+                <span>ب) {{ question.option2 }}</span>
+            </label>
+
+            <label class="option-item">
+                <input type="radio" name="answer" value="3"
+                       {% if saved_answer == 3 %}checked{% endif %}>
+                <span>ج) {{ question.option3 }}</span>
+            </label>
+
+            <label class="option-item">
+                <input type="radio" name="answer" value="4"
+                       {% if saved_answer == 4 %}checked{% endif %}>
+                <span>د) {{ question.option4 }}</span>
+            </label>
+
+            <!-- أزرار التنقل -->
+            <div class="d-flex gap-2 mt-3">
+                {% if index > 0 %}
+                <a href="{{ url_for('exam_take', index=index-1) }}"
+                   class="btn btn-outline-light w-50">السابق</a>
+                {% endif %}
+
+                {% if index + 1 < total_questions %}
+                <button type="submit" name="action" value="next"
+                        class="btn btn-gold w-50">التالي</button>
+                {% else %}
+                <button type="submit" name="action" value="finish"
+                        class="btn btn-danger w-50"
+                        onclick="return confirm('هل تريد إنهاء الامتحان؟')">
+                    إنهاء الامتحان
+                </button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <!-- شريط التنقل بين الأسئلة -->
+    <div class="questions-navigation">
+        {% for i in range(total_questions) %}
+        <a href="{{ url_for('exam_take', index=i) }}"
+           class="q-number-box
+                  {% if i == index %}active{% endif %}
+                  {% if answered.get(i) %}answered{% endif %}">
+            {{ i + 1 }}
+        </a>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- عداد الوقت -->
+<script>
+let minutes = {{ duration }};
+let seconds = 0;
+const timerEl = document.getElementById("timer");
+
+function updateTimer() {
+    let m = minutes.toString().padStart(2, '0');
+    let s = seconds.toString().padStart(2, '0');
+    timerEl.textContent = m + ":" + s;
+
+    if (minutes === 0 && seconds === 0) {
+        alert("انتهى الوقت! سيتم إنهاء الامتحان.");
+        window.location.href = "{{ url_for('exam_finish') }}";
+        return;
+    }
+
+    if (seconds === 0) {
+        minutes--;
+        seconds = 59;
+    } else seconds--;
+
+    setTimeout(updateTimer, 1000);
+}
+
+updateTimer();
+</script>
+{% endblock %}

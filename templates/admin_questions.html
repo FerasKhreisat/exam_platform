@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}إدارة الأسئلة{% endblock %}
+
+{% block content %}
+
+<style>
+.questions-wrapper {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.add-question-card,
+.questions-list-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 1.7rem;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    margin-bottom: 1.5rem;
+}
+
+.form-control, .form-select, textarea {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+}
+
+textarea {
+    min-height: 90px;
+}
+
+.question-box {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+}
+
+.question-box:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+.correct-opt {
+    color: #00ff9d;
+    font-weight: bold;
+}
+
+.btn-gold {
+    background: linear-gradient(135deg, #ffd86b, #ffb347);
+    border: none;
+    color: #000;
+    font-weight: 700;
+}
+</style>
+
+<div class="questions-wrapper">
+
+    <!-- عنوان -->
+    <h2 class="fw-bold mb-3 text-center">
+        إدارة الأسئلة — {{ subject.name }}
+    </h2>
+    <p class="text-center text-info mb-4">{{ subject.grade }}</p>
+
+    <!-- كارد إضافة سؤال جديد -->
+    <div class="add-question-card">
+        <h5 class="fw-bold mb-3">➕ إضافة سؤال جديد</h5>
+
+        <form method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">نص السؤال</label>
+                <textarea name="text" class="form-control" required></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">الخيار 1</label>
+                    <input type="text" name="option1" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">الخيار 2</label>
+                    <input type="text" name="option2" class="form-control" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">الخيار 3</label>
+                    <input type="text" name="option3" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">الخيار 4</label>
+                    <input type="text" name="option4" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">الإجابة الصحيحة</label>
+                <select name="correct_option" class="form-select" required>
+                    <option value="" disabled selected>اختر الإجابة الصحيحة</option>
+                    <option value="1">الخيار 1</option>
+                    <option value="2">الخيار 2</option>
+                    <option value="3">الخيار 3</option>
+                    <option value="4">الخيار 4</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-gold px-4 mt-2">إضافة السؤال</button>
+
+        </form>
+    </div>
+
+    <!-- قائمة الأسئلة -->
+    <div class="questions-list-card">
+        <h5 class="fw-bold mb-3">📘 قائمة الأسئلة</h5>
+
+        {% if questions %}
+            {% for q in questions %}
+            <div class="question-box">
+                <div class="fw-bold text-light mb-2">{{ loop.index }}. {{ q.text }}</div>
+
+                <div class="text-white-50 small mb-2">
+                    1) {{ q.option1 }}<br>
+                    2) {{ q.option2 }}<br>
+                    3) {{ q.option3 }}<br>
+                    4) {{ q.option4 }}
+                </div>
+
+                <div class="correct-opt small">
+                    ✔ الإجابة الصحيحة: {{ q.correct_option }}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-warning text-center">
+                لا توجد أسئلة بعد لهذه المادة.
+            </p>
+        {% endif %}
+
+        <div class="text-center mt-3">
+            <a href="{{ url_for('admin_subjects') }}"
+               class="btn btn-outline-light btn-sm">
+                ⬅ العودة للمواد
+            </a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

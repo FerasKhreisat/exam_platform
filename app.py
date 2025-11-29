@@ -100,8 +100,8 @@ class ExamAnswer(db.Model):
     student_answer = db.Column(db.String(10), nullable=False)
     is_correct = db.Column(db.Boolean, nullable=False)
 
-@app.before_first_request
-def create_tables():
+# إنشاء الجداول مرة واحدة عند بدء التطبيق (لـ Render أو التشغيل العادي)
+with app.app_context():
     db.create_all()
     
 # ====================
@@ -1025,9 +1025,7 @@ def admin_delete_result(result_id):
 
 
 # ====================
-# تشغيل السيرفر
+# تشغيل السيرفر (محلياً فقط)
 # ====================
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)

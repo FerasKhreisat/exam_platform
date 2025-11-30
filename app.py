@@ -985,7 +985,7 @@ def admin_upload():
     )
 
 
-# ---------- الطلاب ----------
+# ---------- الطلاب -----------
 
 @app.route("/admin/students")
 def admin_students():

@@ -1,5 +1,8 @@
 Flask
 Flask-SQLAlchemy
+SQLAlchemy
+reportlab
 xhtml2pdf
 openpyxl
 psycopg2-binary
+gunicorn

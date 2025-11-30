@@ -1,5 +1,5 @@
 Flask
 Flask-SQLAlchemy
-sqlalchemy
+xhtml2pdf
 openpyxl
-gunicorn
+psycopg2-binary

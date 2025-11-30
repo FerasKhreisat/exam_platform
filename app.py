@@ -925,21 +925,47 @@ def admin_upload():
                 wb = openpyxl.load_workbook(filepath)
                 sheet = wb.active
 
+                # نقرأ صف العناوين (الهيدر)
+                header_row = next(sheet.iter_rows(min_row=1, max_row=1, values_only=True))
+                headers = [(str(h).strip().lower() if h else "") for h in header_row]
+
+                def get_index(col_name: str) -> int:
+                    """إرجاع رقم العمود حسب اسم الهيدر، أو رفع خطأ إن لم يوجد."""
+                    try:
+                        return headers.index(col_name.lower())
+                    except ValueError:
+                        raise ValueError(f"لم يتم العثور على العمود '{col_name}' في ملف الإكسل")
+
+                # تحديد أعمدة السؤال والخيارات والإجابة الصحيحة
+                q_idx       = get_index("question")
+                opt_a_idx   = get_index("option_a")
+                opt_b_idx   = get_index("option_b")
+                opt_c_idx   = get_index("option_c")
+                opt_d_idx   = get_index("option_d")
+                correct_idx = get_index("correct")
+
                 added = 0
+                # نبدأ من السطر الثاني (بعد الهيدر)
                 for row in sheet.iter_rows(min_row=2, values_only=True):
-                    if not row or not row[0]:
+                    # تخطّي الصفوف الفارغة أو التي لا تحتوي سؤالاً
+                    if not row or q_idx >= len(row) or not row[q_idx]:
                         continue
 
-                    text, o1, o2, o3, o4, correct = row[:6]
+                    text    = str(row[q_idx])
+                    o1      = str(row[opt_a_idx]) if opt_a_idx < len(row) else ""
+                    o2      = str(row[opt_b_idx]) if opt_b_idx < len(row) else ""
+                    o3      = str(row[opt_c_idx]) if opt_c_idx < len(row) else ""
+                    o4      = str(row[opt_d_idx]) if opt_d_idx < len(row) else ""
+                    correct = str(row[correct_idx]).strip() if correct_idx < len(row) else ""
 
                     q = Question(
                         subject_id=int(subject_id),
-                        text=str(text),
-                        option1=str(o1),
-                        option2=str(o2),
-                        option3=str(o3),
-                        option4=str(o4),
-                        correct_option=str(correct).strip(),
+                        text=text,
+                        option1=o1,
+                        option2=o2,
+                        option3=o3,
+                        option4=o4,
+                        correct_option=correct,
                     )
                     db.session.add(q)
                     added += 1
@@ -949,7 +975,7 @@ def admin_upload():
 
             except Exception:
                 db.session.rollback()
-                error = "حدث خطأ أثناء قراءة الملف. تأكد من أن التنسيق صحيح."
+                error = "حدث خطأ أثناء قراءة الملف. تأكد من أن التنسيق صحيح وأن عناوين الأعمدة مكتوبة بشكل صحيح."
 
     return render_template(
         "admin_upload.html",
